@@ -17,8 +17,8 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Component
 public class ChatRoomStoreImpl implements ChatRoomRepository {
-    private final RedisTemplate<String, Object> redisTemplate;
     private final String ROOM = "ROOM";
+    private final RedisTemplate<String, Object> redisTemplate;
     private HashOperations<String, String, ChatRoom> hashOperations;
     private final RedisMessageListenerContainer messageListenerContainer;
     private final MessageSubscriber messageSubscriber;
