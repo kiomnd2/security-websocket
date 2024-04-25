@@ -1,4 +1,4 @@
-package test.domain.chatroom;
+package test.domain.room;
 
 import lombok.Builder;
 import lombok.Getter;
