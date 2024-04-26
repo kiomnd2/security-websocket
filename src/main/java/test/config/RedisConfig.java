@@ -9,30 +9,17 @@ import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import test.handler.RedisSubscriber;
+import test.infrastructure.message.MessageSubscriber;
 
 @Configuration
 public class RedisConfig {
 
     @Bean
     public RedisMessageListenerContainer redisMessageListenerContainer(
-            RedisConnectionFactory redisConnectionFactory
-            , RedisSubscriber subscriber
-    ) {
+            RedisConnectionFactory redisConnectionFactory) {
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(redisConnectionFactory);
-        container.addMessageListener(listenerAdapter(subscriber), getTopic());
         return container;
-    }
-
-    @Bean
-    public ChannelTopic getTopic() {
-        return new ChannelTopic("topic");
-    }
-
-    @Bean
-    public MessageListenerAdapter listenerAdapter(RedisSubscriber redisSubscriber) {
-        return new MessageListenerAdapter(redisSubscriber, "onMessage");
     }
 
     @Bean
